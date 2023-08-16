@@ -1,4 +1,4 @@
-# Shared Storage Expo Module Documentation
+# Shared Storage
 The Shared Storage module offers a convenient way to seamlessly interact with shared storage in your Expo application. With this module, you gain access to methods designed for data management, including setting, getting, and removing data from shared storage. This facilitates a hassle-free experience for handling shared storage interactions.
 ## Platform-Specific Storage Mechanisms
 Behind the scenes, the Shared Storage module employs platform-specific storage mechanisms to ensure optimal performance and compatibility.
