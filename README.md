@@ -20,7 +20,12 @@ npx expo run:ios
 ```
 Import the module in your code:
 ```typescript
-import { set, get, remove } from '@footshop/react-native-shared-storage'
+import { SharedStorage } from '@footshop/react-native-shared-storage'
+ ```
+
+Create instance of storage with storage key:
+```typescript
+const storage = new SharedStorage({ storageKey: "group.com.example.app"});
  ```
 
 ## Methods
@@ -35,13 +40,12 @@ It returns a Promise that resolves with the stored data.
 #### Example usage:
 ```typescript
 const options = {
-  suiteName: 'group.com.example.app',  
   key: 'key',
   data: 'data to store'
 };
 
 try {
-  const data = await set(options);
+  const data = await storage.set(options);
   console.log('Data stored:', data);
 } catch (error) {
   console.error('Error storing data:', error);
@@ -59,12 +63,11 @@ It returns a Promise that resolves with the retrieved data or null if the data i
 
 ```typescript
 const options = {
-   suiteName: 'group.com.example.app', 
    key: 'key'
 };
 
 try {
-  const data = await get(options);
+  const data = await storage.get(options);
   if (data !== null) {
     console.log('Retrieved data:', data);
   } else {
@@ -85,12 +88,11 @@ It returns a Promise that resolves when the data is successfully removed.
 #### Example usage:
 ```typescript
 const options = {
-  suiteName: 'group.com.example.app',
   key: 'key'
 };
 
 try {
-  await remove(options);
+  await storage.remove(options);
   console.log('Data removed successfully.');
 } catch (error) {
   console.error('Error removing data:', error);
