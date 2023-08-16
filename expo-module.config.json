@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android", "web"],
+  "ios": {
+    "modules": ["SharedStorageModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.footshop.react.native.shared.storage.SharedStorageModule"]
+  }
+}

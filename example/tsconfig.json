@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@footshop/react-native-shared-storage": ["../src/index"],
+      "@footshop/react-native-shared-storage/*": ["../src/*"]
+    }
+  }
+}
