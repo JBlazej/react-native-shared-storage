@@ -10,7 +10,7 @@ import expo.modules.kotlin.modules.Promise
 
 data class SetOptions(
     @Field
-    var suiteName: String = "",
+    var storageKey: String = "",
 
     @Field
     var key: String = "",
@@ -21,7 +21,7 @@ data class SetOptions(
 
 data class GetOptions(
     @Field
-    var suiteName: String = "",
+    var storageKey: String = "",
 
     @Field
     var key: String = ""
@@ -29,7 +29,7 @@ data class GetOptions(
 
 data class RemoveOptions(
     @Field
-    var suiteName: String = "",
+    var storageKey: String = "",
 
     @Field
     var key: String = ""
@@ -41,7 +41,7 @@ class SharedStorageModule : Module() {
 
         AsyncFunction("get") { options: GetOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options.suiteName)
+                val sharedPreferences = getSharedPreferences(options.storageKey)
                 if (options.key.isNotBlank()) {
                     try {
                         val value = sharedPreferences.getString(options.key, null)
@@ -57,7 +57,7 @@ class SharedStorageModule : Module() {
 
         AsyncFunction("set") { options: SetOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options.suiteName)
+                val sharedPreferences = getSharedPreferences(options.storageKey)
                 if (options.key.isNotBlank() && options.data != null) {
                     try {
                         val editor = sharedPreferences.edit()
@@ -75,7 +75,7 @@ class SharedStorageModule : Module() {
 
         AsyncFunction("remove") { options: RemoveOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options.suiteName)
+                val sharedPreferences = getSharedPreferences(options.storageKey)
                 if (options.key.isNotBlank()) {
                     try {
                         val editor = sharedPreferences.edit()
@@ -92,8 +92,8 @@ class SharedStorageModule : Module() {
         }
     }
 
-    private fun getSharedPreferences(suiteName: String): SharedPreferences {
+    private fun getSharedPreferences(storageKey: String): SharedPreferences {
         val context = getContext()
-        return context.getSharedPreferences(suiteName, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(storageKey, Context.MODE_PRIVATE)
     }
 }

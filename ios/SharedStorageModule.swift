@@ -2,7 +2,7 @@ import ExpoModulesCore
 
 struct SetOptions: Record {
     @Field
-    var suiteName: String = ""
+    var storageKey: String = ""
 
     @Field
     var key: String = ""
@@ -13,7 +13,7 @@ struct SetOptions: Record {
 
 struct GetOptions: Record {
     @Field
-    var suiteName: String = ""
+    var storageKey: String = ""
 
     @Field
     var key: String = ""
@@ -21,7 +21,7 @@ struct GetOptions: Record {
 
 struct RemoveOptions: Record {
     @Field
-    var suiteName: String = ""
+    var storageKey: String = ""
 
     @Field
     var key: String = ""
@@ -32,7 +32,7 @@ public class SharedStorageModule: Module {
         Name("SharedStorage")
 
         AsyncFunction("set") { (options: SetOptions, promise: Promise) -> Void in
-            guard let sharedDefaults = UserDefaults(suiteName: options.suiteName) else {
+            guard let sharedDefaults = UserDefaults(suiteName: options.storageKey) else {
                 promise.reject("SET_ITEM_ERROR", "User defaults is nil")
                 return
             }
@@ -56,7 +56,7 @@ public class SharedStorageModule: Module {
         }.runOnQueue(.main)
 
         AsyncFunction("get") { (options: GetOptions, promise: Promise) -> Void in
-            guard let sharedDefaults = UserDefaults(suiteName: options.suiteName) else {
+            guard let sharedDefaults = UserDefaults(suiteName: options.storageKey) else {
                 promise.reject("GET_ITEM_ERROR", "User defaults is nil")
                 return
             }
@@ -76,7 +76,7 @@ public class SharedStorageModule: Module {
         }.runOnQueue(.main)
 
         AsyncFunction("remove") { (options: RemoveOptions, promise: Promise) -> Void in
-            if let sharedDefaults = UserDefaults.init(suiteName: options.suiteName) {
+            if let sharedDefaults = UserDefaults.init(suiteName: options.storageKey) {
                 sharedDefaults.removeObject(forKey: options.key)
                 sharedDefaults.synchronize()
                 promise.resolve(nil)

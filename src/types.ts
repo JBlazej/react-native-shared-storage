@@ -1,7 +1,6 @@
 export type Data = object | string | number
 
 export type Options = {
-  suiteName: string
   key: string
 }
 
@@ -12,3 +11,7 @@ export type SetOptions<T extends Data> = {
 export type GetOptions = Options
 
 export type RemoveOptions = Options
+
+export type StorageOptions = {
+  storageKey: string
+}

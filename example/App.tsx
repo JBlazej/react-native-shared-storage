@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native'
 
-import * as SharedStorage from '@footshop/react-native-shared-storage';
+import * as SharedStorage from '@footshop/react-native-shared-storage'
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>{SharedStorage.hello()}</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
