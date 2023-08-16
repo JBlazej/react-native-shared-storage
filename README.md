@@ -23,7 +23,7 @@ import { set, get, remove } from '@footshop/react-native-shared-storage'
  ```
 
 ## Methods
-### `set(options: SetOptions<Data>): Promise<T>`
+### `set<T>(options: SetOptions<Data>): Promise<T>`
 This method allows you to store data in shared storage. It takes an object with the following properties:
 
 * **suiteName** (string, required): The name of the shared storage suite.
@@ -47,7 +47,7 @@ try {
 }
 ```
 
-### `get(options: GetOptions): Promise<T | null>`
+### `get<T>(options: GetOptions): Promise<T | null>`
 This method allows you to retrieve data from shared storage. It takes an object with the following properties:
 
 * **suiteName** (string, required): The name of the shared storage suite.
