@@ -97,5 +97,3 @@ try {
 
 ## Conclusion
 The Shared Storage Expo Module simplifies the process of storing, retrieving, and removing data from shared storage in your Expo project. Use the provided methods to manage data in shared storage with ease.
-
-Please make sure to adapt this documentation according to your module's actual behavior and any additional details you might want to include.
