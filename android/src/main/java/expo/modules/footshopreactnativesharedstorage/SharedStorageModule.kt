@@ -8,17 +8,43 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import expo.modules.kotlin.modules.Promise
 
+data class SetOptions(
+    @Field
+    var suiteName: String = "",
+
+    @Field
+    var key: String = "",
+
+    @Field
+    var data: Any? = null
+)
+
+data class GetOptions(
+    @Field
+    var suiteName: String = "",
+
+    @Field
+    var key: String = ""
+)
+
+data class RemoveOptions(
+    @Field
+    var suiteName: String = "",
+
+    @Field
+    var key: String = ""
+)
+
 class SharedStorageModule : Module() {
     override fun definition() = ModuleDefinition {
         Name("SharedStorage")
 
-        AsyncFunction("get") { options: Map<String, String>, promise: Promise ->
+        AsyncFunction("get") { options: GetOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options)
-                val key = options["key"]
-                if (key != null) {
+                val sharedPreferences = getSharedPreferences(options.suiteName)
+                if (options.key.isNotBlank()) {
                     try {
-                        val value = sharedPreferences.getString(key, null)
+                        val value = sharedPreferences.getString(options.key, null)
                         promise.resolve(value)
                     } catch (e: Exception) {
                         promise.reject("GET_ERROR", "An error occurred while retrieving data.", e)
@@ -29,34 +55,31 @@ class SharedStorageModule : Module() {
             }
         }
 
-        AsyncFunction("set") { options: Map<String, String>, promise: Promise ->
+        AsyncFunction("set") { options: SetOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options)
-                val key = options["key"]
-                val value = options["value"]
-                if (key != null && value != null) {
+                val sharedPreferences = getSharedPreferences(options.suiteName)
+                if (options.key.isNotBlank() && options.data != null) {
                     try {
                         val editor = sharedPreferences.edit()
-                        editor.putString(key, value)
+                        editor.putString(options.key, options.data.toString())
                         editor.apply()
                         promise.resolve(null)
                     } catch (e: Exception) {
                         promise.reject("SET_ERROR", "An error occurred while saving data.", e)
                     }
                 } else {
-                    promise.reject("INVALID_OPTIONS", "The 'key' and 'value' options are required.")
+                    promise.reject("INVALID_OPTIONS", "The 'key' and 'data' options are required.")
                 }
             }
         }
 
-        AsyncFunction("remove") { options: Map<String, String>, promise: Promise ->
+        AsyncFunction("remove") { options: RemoveOptions, promise: Promise ->
             launch(Dispatchers.Main) {
-                val sharedPreferences = getSharedPreferences(options)
-                val key = options["key"]
-                if (key != null) {
+                val sharedPreferences = getSharedPreferences(options.suiteName)
+                if (options.key.isNotBlank()) {
                     try {
                         val editor = sharedPreferences.edit()
-                        editor.remove(key)
+                        editor.remove(options.key)
                         editor.apply()
                         promise.resolve(null)
                     } catch (e: Exception) {
@@ -69,9 +92,8 @@ class SharedStorageModule : Module() {
         }
     }
 
-    private fun getSharedPreferences(options: Map<String, String>): SharedPreferences {
+    private fun getSharedPreferences(suiteName: String): SharedPreferences {
         val context = getContext()
-        val sharedPreferencesName = options["sharedPreferencesName"] ?: "SharedStorageModule"
-        return context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(suiteName, Context.MODE_PRIVATE)
     }
 }
