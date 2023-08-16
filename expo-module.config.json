@@ -4,6 +4,6 @@
     "modules": ["SharedStorageModule"]
   },
   "android": {
-    "modules": ["expo.modules.footshop.react.native.shared.storage.SharedStorageModule"]
+    "modules": ["expo.modules.footshopreactnativesharedstorage.SharedStorageModule"]
   }
 }

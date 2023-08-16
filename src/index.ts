@@ -1,26 +1,16 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import SharedStorageModule from './SharedStorageModule'
+import {Data, GetOptions, RemoveOptions, SetOptions} from './types'
 
-// Import the native module. On web, it will be resolved to SharedStorage.web.ts
-// and on native platforms to SharedStorage.ts
-import SharedStorageModule from './SharedStorageModule';
-import SharedStorageView from './SharedStorageView';
-import { ChangeEventPayload, SharedStorageViewProps } from './SharedStorage.types';
-
-// Get the native constant value.
-export const PI = SharedStorageModule.PI;
-
-export function hello(): string {
-  return SharedStorageModule.hello();
+export function set<T extends Data>(options: SetOptions<Data>): Promise<T> {
+  return SharedStorageModule.set(options)
 }
 
-export async function setValueAsync(value: string) {
-  return await SharedStorageModule.setValueAsync(value);
+export function get<T extends Data>(options: GetOptions): Promise<T | null> {
+  return SharedStorageModule.get(options)
 }
 
-const emitter = new EventEmitter(SharedStorageModule ?? NativeModulesProxy.SharedStorage);
-
-export function addChangeListener(listener: (event: ChangeEventPayload) => void): Subscription {
-  return emitter.addListener<ChangeEventPayload>('onChange', listener);
+export function remove(options: RemoveOptions): Promise<null> {
+  return SharedStorageModule.remove(options)
 }
 
-export { SharedStorageView, SharedStorageViewProps, ChangeEventPayload };
+export * from './types'
