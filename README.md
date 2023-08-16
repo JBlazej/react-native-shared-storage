@@ -18,6 +18,7 @@ You'll need to rebuild your dev client. SharedStorage will not work in Expo Go.
 npx expo prebuild --clean
 npx expo run:ios
 ```
+### Usage
 Import the module in your code:
 ```typescript
 import { SharedStorage } from '@footshop/react-native-shared-storage'
@@ -25,49 +26,49 @@ import { SharedStorage } from '@footshop/react-native-shared-storage'
 
 Create instance of storage with storage key:
 ```typescript
-const storage = new SharedStorage({ storageKey: "group.com.example.app"});
+const storage = new SharedStorage({ storageKey: "group.com.example.app"})
+ ```
+
+You can change the storage key with new key by provided method:
+```typescript
+storage.setStorageKey("group.com.example2.app")
+ ```
+
+Or have multiple instances of storage with different keys:
+```typescript
+const storageOne = new SharedStorage({ storageKey: "group.com.example.app"})
+const storageTwo = new SharedStorage({ storageKey: "group.com.example2.app"})
  ```
 
 ## Methods
-### `set<T>(options: SetOptions<Data>): Promise<T>`
-This method allows you to store data in shared storage. It takes an object with the following properties:
+### `set<T>(key: string, data: T): Promise<T>`
+This method allows you to store data in shared storage.
 
-* **suiteName** (string, required): The name of the shared storage suite.
 * **key** (string, required): The key under which the data will be stored.
 * **data** (object | string | number, required): The data to be stored.
 It returns a Promise that resolves with the stored data.
 
 #### Example usage:
 ```typescript
-const options = {
-  key: 'key',
-  data: 'data to store'
-};
-
 try {
-  const data = await storage.set(options);
+  const data = await storage.set('key', 'data to store');
   console.log('Data stored:', data);
 } catch (error) {
   console.error('Error storing data:', error);
 }
 ```
 
-### `get<T>(options: GetOptions): Promise<T | null>`
-This method allows you to retrieve data from shared storage. It takes an object with the following properties:
+### `get<T>(key: string): Promise<T | null>`
+This method allows you to retrieve data from shared storage.
 
-* **suiteName** (string, required): The name of the shared storage suite.
 * **key** (string, required): The key of the data to retrieve.
 It returns a Promise that resolves with the retrieved data or null if the data is not found.
 
 #### Example usage:
 
 ```typescript
-const options = {
-   key: 'key'
-};
-
 try {
-  const data = await storage.get(options);
+  const data = await storage.get('key');
   if (data !== null) {
     console.log('Retrieved data:', data);
   } else {
@@ -78,21 +79,16 @@ try {
 }
 ```
 
-### `remove(options: RemoveOptions): Promise<null>`
-This method allows you to remove data from shared storage. It takes an object with the following properties:
+### `remove(key: string): Promise<null>`
+This method allows you to remove data from shared storage.
 
-* **suiteName** (string, required): The name of the shared storage suite.
 * **key** (string, required): The key of the data to remove.
 It returns a Promise that resolves when the data is successfully removed.
 
 #### Example usage:
 ```typescript
-const options = {
-  key: 'key'
-};
-
 try {
-  await storage.remove(options);
+  await storage.remove("key");
   console.log('Data removed successfully.');
 } catch (error) {
   console.error('Error removing data:', error);

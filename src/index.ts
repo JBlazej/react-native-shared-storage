@@ -1,5 +1,5 @@
 import SharedStorageModule from './SharedStorageModule'
-import {Data, GetOptions, RemoveOptions, SetOptions, StorageOptions} from './types'
+import {Data, StorageOptions} from './types'
 
 export class SharedStorage {
   private storageKey: string
@@ -8,25 +8,26 @@ export class SharedStorage {
     this.storageKey = options.storageKey
   }
 
-  async set<T extends Data>(options: SetOptions<T>): Promise<T> {
+  async set<T extends Data>(key: string, data: T): Promise<T> {
     const result = await SharedStorageModule.set({
-      ...options,
+      key,
+      data,
       storageKey: this.storageKey,
     })
     return result as T
   }
 
-  async get<T extends Data>(options: GetOptions): Promise<T | null> {
+  async get<T extends Data>(key: string): Promise<T | null> {
     const result = await SharedStorageModule.get({
-      ...options,
+      key,
       storageKey: this.storageKey,
     })
     return result as T | null
   }
 
-  async remove(options: RemoveOptions): Promise<null> {
+  async remove(key: string): Promise<null> {
     await SharedStorageModule.remove({
-      ...options,
+      key,
       storageKey: this.storageKey,
     })
     return null
