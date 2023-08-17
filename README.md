@@ -17,6 +17,7 @@ You'll need to rebuild your dev client. SharedStorage will not work in Expo Go.
 ```sh
 npx expo prebuild --clean
 npx expo run:ios
+npx expo run:android
 ```
 ### Usage
 Import the module in your code:
