@@ -17,3 +17,5 @@ export type ContainsOptions = Options
 export type StorageOptions = {
   storageKey: string
 }
+
+export type Storage = Record<string, Data>

@@ -1,39 +1,42 @@
 import SharedStorageModule from './SharedStorageModule'
-import {Data, StorageOptions} from './types'
+import {StorageOptions, Storage} from './types'
 
-export class SharedStorage {
+export class SharedStorage<TStorage extends Storage = Storage> {
   private storageKey: string
 
   constructor(options: StorageOptions) {
     this.storageKey = options.storageKey
   }
 
-  async set<T extends Data>(key: string, data: T): Promise<T> {
+  async set<Key extends keyof TStorage>(key: Key, data: TStorage[Key]): Promise<TStorage[Key]> {
     const result = await SharedStorageModule.set({
       key,
       data,
       storageKey: this.storageKey,
     })
-    return result as T
+
+    return result as TStorage[Key]
   }
 
-  async get<T extends Data>(key: string): Promise<T | null> {
+  async get<Key extends keyof TStorage>(key: Key): Promise<TStorage[Key] | null> {
     const result = await SharedStorageModule.get({
       key,
       storageKey: this.storageKey,
     })
-    return result as T | null
+
+    return result as TStorage[Key] | null
   }
 
-  async remove(key: string): Promise<null> {
+  async remove<Key extends keyof TStorage>(key: Key): Promise<null> {
     await SharedStorageModule.remove({
       key,
       storageKey: this.storageKey,
     })
+
     return null
   }
 
-  async contains(key: string): Promise<boolean> {
+  async contains<Key extends keyof TStorage>(key: Key): Promise<boolean> {
     const result = await SharedStorageModule.contains({
       key,
       storageKey: this.storageKey,
