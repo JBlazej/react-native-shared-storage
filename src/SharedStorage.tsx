@@ -33,6 +33,23 @@ export class SharedStorage {
     return null
   }
 
+  async contains(key: string): Promise<boolean> {
+    const result = await SharedStorageModule.contains({
+      key,
+      storageKey: this.storageKey,
+    })
+
+    return result as boolean
+  }
+
+  async getAllKeys(): Promise<string[]> {
+    const result = await SharedStorageModule.getAllKeys({
+      storageKey: this.storageKey,
+    })
+
+    return result as string[]
+  }
+
   changeStorageKey(newStorageKey: string): void {
     if (this.storageKey === newStorageKey) {
       console.warn('SharedStorage: changeStorageKey() called with the same storageKey')

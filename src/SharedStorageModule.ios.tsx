@@ -1,6 +1,6 @@
 import {requireNativeModule} from 'expo-modules-core'
 
-import {Data, GetOptions, RemoveOptions, SetOptions, StorageOptions} from './types'
+import {ContainsOptions, Data, GetOptions, RemoveOptions, SetOptions, StorageOptions} from './types'
 
 const SharedStorageModule = requireNativeModule('SharedStorage')
 
@@ -13,5 +13,11 @@ export default {
   },
   set<T extends Data>(options: SetOptions<T> & StorageOptions): Promise<T> {
     return SharedStorageModule.set(options)
+  },
+  contains: (options: ContainsOptions & StorageOptions): Promise<boolean> => {
+    return SharedStorageModule.contains(options)
+  },
+  getAllKeys: (options: StorageOptions): Promise<string[]> => {
+    return SharedStorageModule.getAllKeys(options)
   },
 }

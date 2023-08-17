@@ -27,6 +27,19 @@ struct RemoveOptions: Record {
     var key: String = ""
 }
 
+struct GetAllKeysOptions: Record {
+    @Field
+    var storageKey: String = ""
+}
+
+struct ContainsOptions: Record {
+    @Field
+    var storageKey: String = ""
+
+    @Field
+    var key: String = ""
+}
+
 public class SharedStorageModule: Module {
     public func definition() -> ModuleDefinition {
         Name("SharedStorage")
@@ -83,6 +96,26 @@ public class SharedStorageModule: Module {
             } else {
                 promise.reject("DELETE_ITEM_ERROR", "User defaults is nil")
             }
+        }.runOnQueue(.main)
+
+        AsyncFunction("getAllKeys") { (options: GetAllKeysOptions, promise: Promise) -> Void in
+            guard let sharedDefaults = UserDefaults(suiteName: options.storageKey) else {
+                promise.reject("GET_ALL_KEYS_ERROR", "User defaults is nil")
+                return
+            }
+
+            let allKeys = sharedDefaults.dictionaryRepresentation().keys.map { $0 as String }
+            promise.resolve(allKeys)
+        }.runOnQueue(.main)
+
+        AsyncFunction("contains") { (options: ContainsOptions, promise: Promise) -> Void in
+            guard let sharedDefaults = UserDefaults(suiteName: options.storageKey) else {
+                promise.reject("CONTAINS_ERROR", "User defaults is nil")
+                return
+            }
+
+            let containsKey = sharedDefaults.object(forKey: options.key) != nil
+            promise.resolve(containsKey)
         }.runOnQueue(.main)
     }
 }

@@ -95,5 +95,33 @@ try {
 }
 ```
 
+### `contains(key: string): Promise<boolean>`
+This method allows you to checked if key does exist in shared storage.
+
+* **key** (string, required): The key of the data to check.
+
+#### Example usage:
+```typescript
+try {
+  const isExists = await storage.contains("key");
+  console.log('Is key in shared storage', isExists);
+} catch (error) {
+  console.error('Error contains:', error);
+}
+```
+
+### `getAllKeys(): Promise<string[]>`
+This method allows you to get all keys from storage.
+
+#### Example usage:
+```typescript
+try {
+  const keys = await storage.getAllKeys();
+  console.log('All keys', keys);
+} catch (error) {
+  console.error('Error getAllKeys:', error);
+}
+```
+
 ## Conclusion
 The Shared Storage Expo Module simplifies the process of storing, retrieving, and removing data from shared storage in your Expo project. Use the provided methods to manage data in shared storage with ease.

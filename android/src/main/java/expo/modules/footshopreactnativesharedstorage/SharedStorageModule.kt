@@ -27,7 +27,12 @@ data class GetOptions(
     var key: String = ""
 )
 
-data class RemoveOptions(
+data class GetAllKeysOptions(
+    @Field
+    var storageKey: String = ""
+)
+
+data class ContainsOptions(
     @Field
     var storageKey: String = "",
 
@@ -89,6 +94,34 @@ class SharedStorageModule : Module() {
                     promise.reject("INVALID_OPTIONS", "The 'key' option is missing.")
                 }
             }
+        }
+
+        AsyncFunction("getAllKeys") { options: GetAllKeysOptions, promise: Promise ->
+            launch(Dispatchers.Main) {
+                val sharedPreferences = getSharedPreferences(options.storageKey)
+                try {
+                    val allKeys = sharedPreferences.all.keys.toList()
+                    promise.resolve(allKeys)
+                } catch (e: Exception) {
+                    promise.reject("GET_ALL_KEYS_ERROR", "An error occurred while retrieving keys.", e)
+                }
+            }
+        }
+
+        AsyncFunction("contains") { options: ContainsOptions, promise: Promise ->
+            launch(Dispatchers.Main) {
+               val sharedPreferences = getSharedPreferences(options.storageKey)
+               if (options.key.isNotBlank()) {
+                   try {
+                       val containsKey = sharedPreferences.contains(options.key)
+                       promise.resolve(containsKey)
+                   } catch (e: Exception) {
+                       promise.reject("CONTAINS_ERROR", "An error occurred while checking for key existence.", e)
+                   }
+               } else {
+                   promise.reject("INVALID_OPTIONS", "The 'key' option is missing.")
+               }
+           }
         }
     }
 

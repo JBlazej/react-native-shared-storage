@@ -12,13 +12,25 @@ export default {
   remove() {
     if (isDev) {
       // eslint-disable-next-line no-console
-      console.warn('[sharedStorage] SharedStorage.delete() is not implemented on this platform.')
+      console.warn('[sharedStorage] SharedStorage.remove() is not implemented on this platform.')
     }
   },
   set() {
     if (isDev) {
       // eslint-disable-next-line no-console
       console.warn('[sharedStorage] SharedStorage.set() is not implemented on this platform.')
+    }
+  },
+  contains() {
+    if (isDev) {
+      // eslint-disable-next-line no-console
+      console.warn('[sharedStorage] SharedStorage.contains() is not implemented on this platform.')
+    }
+  },
+  getAllKeys() {
+    if (isDev) {
+      // eslint-disable-next-line no-console
+      console.warn('[sharedStorage] SharedStorage.getAllKeys() is not implemented on this platform.')
     }
   },
 } as any
