@@ -1,7 +1,7 @@
 {
   "name": "@footshop/react-native-shared-storage",
-  "version": "0.1.0",
-  "description": "todo",
+  "version": "1.0.0",
+  "description": "Cross-platform storage for data sharing and synchronization between different apps.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -45,5 +45,13 @@
     "expo": "*",
     "react": "*",
     "react-native": "*"
-  }
+  },
+  "files": [
+    "build",
+    "src",
+    "index.d.ts",
+    "ios",
+    "android",
+    "expo-module.config.json"
+  ]
 }
