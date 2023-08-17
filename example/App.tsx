@@ -2,7 +2,15 @@ import {Button, View} from 'react-native'
 
 import {SharedStorage} from '@footshop/react-native-shared-storage'
 
-const storage = new SharedStorage({storageKey: 'group.com.example.app'})
+type Storage = {
+  key: string
+  otherKey: {
+    a: string
+    b: number
+  }
+}
+
+const storage = new SharedStorage<Storage>({storageKey: 'group.com.example.app'})
 
 export default function App() {
   const set = async () => {
