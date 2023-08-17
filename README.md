@@ -30,6 +30,19 @@ Create instance of storage with storage key:
 const storage = new SharedStorage({ storageKey: "group.com.example.app"})
  ```
 
+You can type storage with generics and enhance type safety:
+```typescript
+type Storage = {
+  a: string
+  b: {
+    a: string
+    b: number
+  }
+}
+
+const storage = new SharedStorage<Storage>({ storageKey: "group.com.example.app"})
+ ```
+
 You can change the storage key with new key by provided method:
 ```typescript
 storage.setStorageKey("group.com.example2.app")
@@ -42,7 +55,7 @@ const storageTwo = new SharedStorage({ storageKey: "group.com.example2.app"})
  ```
 
 ## Methods
-### `set<T>(key: string, data: T): Promise<T>`
+### `set<Key extends keyof TStorage>(key: string, data: TStorage[Key]): Promise<TStorage[Key]>`
 This method allows you to store data in shared storage.
 
 * **key** (string, required): The key under which the data will be stored.
@@ -59,7 +72,7 @@ try {
 }
 ```
 
-### `get<T>(key: string): Promise<T | null>`
+### `get<Key extends keyof TStorage>(key: Key): Promise<TStorage[Key] | null>`
 This method allows you to retrieve data from shared storage.
 
 * **key** (string, required): The key of the data to retrieve.
@@ -80,7 +93,7 @@ try {
 }
 ```
 
-### `remove(key: string): Promise<null>`
+### `remove<Key extends keyof TStorage>(key: Key): Promise<null>`
 This method allows you to remove data from shared storage.
 
 * **key** (string, required): The key of the data to remove.
@@ -96,7 +109,7 @@ try {
 }
 ```
 
-### `contains(key: string): Promise<boolean>`
+### `contains<Key extends keyof TStorage>(key: Key): Promise<boolean>`
 This method allows you to checked if key does exist in shared storage.
 
 * **key** (string, required): The key of the data to check.
