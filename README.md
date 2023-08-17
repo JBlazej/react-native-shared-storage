@@ -7,6 +7,8 @@ Behind the scenes, the Shared Storage module employs platform-specific storage m
 
 * **Android:** On the Android platform, the module harnesses SharedPreferences to manage shared storage. SharedPreferences provide a streamlined approach to store and retrieve data across different parts of your Android app, offering efficient storage and retrieval operations.
 
+* **Web:** On the web, the module is not available. You can use the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) instead.
+
 ## Installation
 ### ⚠️️ NOT PUBLISHED YET ⚠️️
 ```sh
