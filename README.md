@@ -27,31 +27,31 @@ import { SharedStorage } from '@footshop/react-native-shared-storage'
 
 Create instance of storage with storage key:
 ```typescript
-const storage = new SharedStorage({ storageKey: "group.com.example.app"})
+const storage = new SharedStorage({ storageKey: 'group.com.example.app'})
  ```
 
 You can type storage with generics and enhance type safety:
 ```typescript
 type Storage = {
-  a: string
-  b: {
+  key: string
+  otherKey: {
     a: string
     b: number
   }
 }
 
-const storage = new SharedStorage<Storage>({ storageKey: "group.com.example.app"})
+const storage = new SharedStorage<Storage>({ storageKey: 'group.com.example.app'})
  ```
 
 You can change the storage key with new key by provided method:
 ```typescript
-storage.setStorageKey("group.com.example2.app")
+storage.setStorageKey('group.com.example2.app')
  ```
 
 Or have multiple instances of storage with different keys:
 ```typescript
-const storageOne = new SharedStorage({ storageKey: "group.com.example.app"})
-const storageTwo = new SharedStorage({ storageKey: "group.com.example2.app"})
+const storageOne = new SharedStorage({ storageKey: 'group.com.example.app'})
+const storageTwo = new SharedStorage({ storageKey: 'group.com.example2.app'})
  ```
 
 ## Methods
@@ -102,7 +102,7 @@ It returns a Promise that resolves when the data is successfully removed.
 #### Example usage:
 ```typescript
 try {
-  await storage.remove("key")
+  await storage.remove('key')
   console.log('Data removed successfully.')
 } catch (error) {
   console.error('Error removing data:', error)
@@ -117,7 +117,7 @@ This method allows you to checked if key does exist in shared storage.
 #### Example usage:
 ```typescript
 try {
-  const isExists = await storage.contains("key")
+  const isExists = await storage.contains('key')
   console.log('Is key in shared storage', isExists)
 } catch (error) {
   console.error('Error contains:', error)
