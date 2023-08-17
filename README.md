@@ -55,7 +55,7 @@ const storageTwo = new SharedStorage({ storageKey: "group.com.example2.app"})
  ```
 
 ## Methods
-### `set<Key extends keyof TStorage>(key: string, data: TStorage[Key]): Promise<TStorage[Key]>`
+### `set<K extends keyof S>(key: K, data: S[K]): Promise<S[K]>`
 This method allows you to store data in shared storage.
 
 * **key** (string, required): The key under which the data will be stored.
@@ -72,7 +72,7 @@ try {
 }
 ```
 
-### `get<Key extends keyof TStorage>(key: Key): Promise<TStorage[Key] | null>`
+### `get<K extends keyof S>(key: K): Promise<S[K] | null>`
 This method allows you to retrieve data from shared storage.
 
 * **key** (string, required): The key of the data to retrieve.
@@ -93,7 +93,7 @@ try {
 }
 ```
 
-### `remove<Key extends keyof TStorage>(key: Key): Promise<null>`
+### `remove<K extends keyof S>(key: K): Promise<null>`
 This method allows you to remove data from shared storage.
 
 * **key** (string, required): The key of the data to remove.
@@ -109,7 +109,7 @@ try {
 }
 ```
 
-### `contains<Key extends keyof TStorage>(key: Key): Promise<boolean>`
+### `contains<K extends keyof S>(key: K): Promise<boolean>`
 This method allows you to checked if key does exist in shared storage.
 
 * **key** (string, required): The key of the data to check.
