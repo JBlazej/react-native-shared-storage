@@ -36,11 +36,31 @@ export default function App() {
     }
   }
 
+  const contains = async () => {
+    try {
+      const result = await storage.contains('key')
+      console.log('Has key', result)
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
+
+  const getAllKeys = async () => {
+    try {
+      const keys = await storage.getAllKeys()
+      console.log('Keys:', keys)
+    } catch (error) {
+      console.error('Error getAllKeys:', error)
+    }
+  }
+
   return (
     <View style={{flex: 1}}>
       <Button title="Set" onPress={set} />
       <Button title="Get" onPress={get} />
       <Button title="Remove" onPress={remove} />
+      <Button title="Contains" onPress={contains} />
+      <Button title="Get all keys" onPress={getAllKeys} />
     </View>
   )
 }
