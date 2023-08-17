@@ -1,4 +1,3 @@
-### ℹ️ WIP
 # React Native Shared Storage
 The Shared Storage module offers a convenient way to seamlessly interact with shared storage in your Expo application. With this module, you gain access to methods designed for data management, including setting, getting, and removing data from shared storage. This facilitates a hassle-free experience for handling shared storage interactions.
 ## Platform-Specific Storage Mechanisms
@@ -9,6 +8,7 @@ Behind the scenes, the Shared Storage module employs platform-specific storage m
 * **Android:** On the Android platform, the module harnesses SharedPreferences to manage shared storage. SharedPreferences provide a streamlined approach to store and retrieve data across different parts of your Android app, offering efficient storage and retrieval operations.
 
 ## Installation
+### ⚠️️ NOT PUBLISHED YET ⚠️️
 ```sh
 yarn add @footshop/react-native-shared-storage
 ```
