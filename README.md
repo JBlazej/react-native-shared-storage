@@ -59,8 +59,7 @@ const storageTwo = new SharedStorage({ storageKey: 'group.com.example2.app'})
 This method allows you to store data in shared storage.
 
 * **key** (string, required): The key under which the data will be stored.
-* **data** (object | string | number, required): The data to be stored.
-It returns a Promise that resolves with the stored data.
+* **data** (object | string | number, required): The data to be stored. You dont need to stringify data, it will be done automatically.
 
 #### Example usage:
 ```typescript
