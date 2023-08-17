@@ -65,10 +65,10 @@ It returns a Promise that resolves with the stored data.
 #### Example usage:
 ```typescript
 try {
-  const data = await storage.set('key', 'data to store');
-  console.log('Data stored:', data);
+  const data = await storage.set('key', 'data to store')
+  console.log('Data stored:', data)
 } catch (error) {
-  console.error('Error storing data:', error);
+  console.error('Error storing data:', error)
 }
 ```
 
@@ -82,14 +82,14 @@ It returns a Promise that resolves with the retrieved data or null if the data i
 
 ```typescript
 try {
-  const data = await storage.get('key');
+  const data = await storage.get('key')
   if (data !== null) {
-    console.log('Retrieved data:', data);
+    console.log('Retrieved data:', data)
   } else {
-    console.log('Data not found.');
+    console.log('Data not found.')
   }
 } catch (error) {
-  console.error('Error retrieving data:', error);
+  console.error('Error retrieving data:', error)
 }
 ```
 
@@ -102,10 +102,10 @@ It returns a Promise that resolves when the data is successfully removed.
 #### Example usage:
 ```typescript
 try {
-  await storage.remove("key");
-  console.log('Data removed successfully.');
+  await storage.remove("key")
+  console.log('Data removed successfully.')
 } catch (error) {
-  console.error('Error removing data:', error);
+  console.error('Error removing data:', error)
 }
 ```
 
@@ -117,10 +117,10 @@ This method allows you to checked if key does exist in shared storage.
 #### Example usage:
 ```typescript
 try {
-  const isExists = await storage.contains("key");
-  console.log('Is key in shared storage', isExists);
+  const isExists = await storage.contains("key")
+  console.log('Is key in shared storage', isExists)
 } catch (error) {
-  console.error('Error contains:', error);
+  console.error('Error contains:', error)
 }
 ```
 
@@ -130,10 +130,10 @@ This method allows you to get all keys from storage.
 #### Example usage:
 ```typescript
 try {
-  const keys = await storage.getAllKeys();
-  console.log('All keys', keys);
+  const keys = await storage.getAllKeys()
+  console.log('All keys', keys)
 } catch (error) {
-  console.error('Error getAllKeys:', error);
+  console.error('Error getAllKeys:', error)
 }
 ```
 
